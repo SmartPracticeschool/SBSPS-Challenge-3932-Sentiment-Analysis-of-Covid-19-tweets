@@ -44,7 +44,7 @@ from nltk import classify
 
 '''----------Extraction of English Tweets----------'''
 
-tweets = dataset[['user_id','text']][dataset['lang'] == 'en'].reset_index()
+tweets = dataset[['text']][dataset['lang'] == 'en'].reset_index()
 tweets.drop(["index"], axis=1)
 tweet_copy = tweets.copy()  # getting a copy of the original tweets
 # tweets.shape
