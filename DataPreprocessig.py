@@ -36,7 +36,7 @@ from nltk import classify
 
 '''-------------Data Read-------------'''
 
-dataset = pd.read_csv('dataSet.csv')
+dataset = pd.read_csv('DataSet.csv')
 dataset.head()
 #tweets.shape
 
