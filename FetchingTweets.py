@@ -38,10 +38,11 @@ from nltk import classify
 
 # '''-----------------Twitter API credentials keys-----------------'''
 
-# consumerKey = 'fCMvl9q8cNwdPSFT7IFTGKo1r'
-# consumerKeySecret = 'fuXtWlMf97ZAsDceQASEBMQwDHFUuY3H4SMQG8gLXuk0adAQId'
-# accessToken = '769815739393937408-CLRQDROf5x6IoEzlZoqgItSgvg9d7pS'
-# accessTokenSecret = 'NK3TG7xus7aVRR8jgXc3T1W0nLOpqG6qFD3Q1ogFA6Rie'
+# Put your own Credential Keys
+# consumerKey = ''
+# consumerKeySecret = ''
+# accessToken = ''
+# accessTokenSecret = ''
 
 
 
