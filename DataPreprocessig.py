@@ -6,9 +6,9 @@ import pandas as pd
 import nltk
 
 # nltk.download('vedar_lexicon')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
+# nltk.download('punkt')
 
 import tweepy
 import re
@@ -37,8 +37,7 @@ from nltk import classify
 '''-------------Data Read-------------'''
 
 dataset = pd.read_csv('DataSet.csv')
-dataset.head()
-#tweets.shape
+dataset.shape
 
 
 
@@ -61,8 +60,8 @@ dataset.head()
 def removeEmoji(result):
     return result.encode('ascii', 'ignore').decode('ascii')
 
-tweets['text'] = [removeEmoji(i) for i in tweets['text']]
-#tweets.head()
+tweets['clean_text'] = [removeEmoji(i) for i in tweets['text']]
+tweets.head()
 
 
 '''-------------Remove URLs-------------'''
@@ -82,30 +81,29 @@ def removeURL(str):
         temp = str
     return temp
 
-tweets['text'] = tweets['text'].apply(lambda tweet: removeURL(tweet))
-#tweets.head()
+tweets['clean_text'] = tweets['clean_text'].apply(lambda tweet: removeURL(tweet))
+tweets.head()
 
 
 '''-------------Lowercase---------------'''
 
-tweets['text'] = [i.lower() for i in tweets['text']]
-#tweets.head()
+tweets['clean_text'] = [i.lower() for i in tweets['clean_text']]
+tweets.head()
 
 
 '''-------------Removing all Punctuations---------------'''
 
-tweets['text'] = [re.sub('[^a-zA-Z]', ' ', i) for i in tweets['text']]
-#tweets.head()
-
+tweets['clean_text'] = [re.sub('[^a-zA-Z]', ' ', i) for i in tweets['clean_text']]
+tweets.head()
 
 
 '''-------------Remove StopWords--------------'''
 
 stopWords = set(stopwords.words("english"))
-tweets['text'] = tweets['text'].apply(lambda tweet: ' '.join([word for word in tweet.split() if word not in stopWords]))
+tweets['clean_text'] = tweets['clean_text'].apply(lambda tweet: ' '.join([word for word in tweet.split() if word not in stopWords]))
 
 focused_words = ['coronavirus', 'covid', 'quarantine', 'coronavirusoutbreak', 'virus', 'corona', 'lockdown', 'economy']
-#tweets.head()
+tweets.head()
 
 
 '''-------------Stemming------------'''
@@ -118,8 +116,8 @@ def stemWords(word):
     else:
         return ps.stem(word)
 
-tweets['text'] = tweets['text'].apply(lambda tweet: ' '.join([stemWords(word) for word in tweet.split()]))
-#tweets.head()
+tweets['fully_clean_text'] = tweets['clean_text'].apply(lambda tweet: ' '.join([stemWords(word) for word in tweet.split()]))
+tweets.head()
 
 
 '''--------------Lemmatization-------------'''
@@ -132,8 +130,8 @@ def lemmatizeWords(word):
     else:
         return wnl.lemmatize(word)
 
-tweets['text'] = tweets['text'].apply(lambda tweet: ' '.join([lemmatizeWords(word) for word in tweet.split()]))
-#tweets.head()
+tweets['fully_clean_text'] = tweets['fully_clean_text'].apply(lambda tweet: ' '.join([lemmatizeWords(word) for word in tweet.split()]))
+tweets.head()
 
 
 
