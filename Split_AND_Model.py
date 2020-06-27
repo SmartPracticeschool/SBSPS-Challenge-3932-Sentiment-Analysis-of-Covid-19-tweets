@@ -12,6 +12,19 @@ msg_train, msg_test, sent_train, sent_test = train_test_split(x,y, test_size=0.3
 
 '''-------Fit to pipeline--------'''
 
+# using Multinomial Naive Bayes Classifier
+# from sklearn.naive_bayes import MultinomialNB
+
+# classifier = MultinomialNB()
+# classifier.fit(msg_train,sent_train)
+
+# pipeline = Pipeline([
+#     ('bow',CountVectorizer()),  # strings to token integer counts
+#     ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
+#     ('classifier', MultinomialNB()),  # train on TF-IDF vectors w/ Naive Bayes classifier
+# ])
+# pipeline.fit(msg_train,sent_train)
+
 # using Random Forest Classifier
 from sklearn.ensemble import RandomForestClassifier
 classifier = RandomForestClassifier()
