@@ -42,13 +42,13 @@ from nltk import classify
 
 
 
-'''----------Extraction of English Tweets----------'''
+'''-------------English Tweets--------------'''
 
-tweets = dataset[['text']][dataset['lang'] == 'en'].reset_index()
+tweets = dataset[['text','location']][dataset['lang'] == 'en'].reset_index()
 tweets.drop(["index"], axis=1)
 tweet_copy = tweets.copy()  # getting a copy of the original tweets
 # tweets.shape
-# tweets.head()
+tweets.head()
 # tweets.info()
 
 
@@ -72,19 +72,19 @@ tweet_copy = tweets.copy()  # getting a copy of the original tweets
 
 
 
-'''--------------Labeling the tweets---------------'''
+'''------------Label Tweets according to the Sentiment------------'''
 
 def detect_polarity(text):
     return TextBlob(text).sentiment.polarity
 
-tweets['polarity'] = tweets.text.apply(detect_polarity)
+tweets['polarity'] = tweets.fully_clean_text.apply(detect_polarity)
 tweets.head()
 # tweets.describe()
 
 def detect_subjectivity(text):
     return TextBlob(text).sentiment.subjectivity
 
-tweets['subjectivity'] = tweets.text.apply(detect_subjectivity)
+tweets['subjectivity'] = tweets.fully_clean_text.apply(detect_subjectivity)
 tweets.head()
 # tweets.describe()
 
@@ -96,18 +96,19 @@ def detect_sentiment(text):
     else:
         return 0
 
-tweets['sentiment'] = tweets.text.apply(detect_sentiment)
+tweets['sentiment'] = tweets.fully_clean_text.apply(detect_sentiment)
 tweets.head()
 
 
 '''--------------Vectorization--------------'''
 
-x = tweets['text']
+x = tweets['fully_clean_text']
 y = tweets['sentiment']
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 tfidf_word_vectorizer = TfidfVectorizer(stop_words='english',max_features=1000,decode_error='ignore',use_idf=True)
 x = tfidf_word_vectorizer.fit_transform(x)
+# tfidf_word_vectorizer.vocabulary_
 
 
