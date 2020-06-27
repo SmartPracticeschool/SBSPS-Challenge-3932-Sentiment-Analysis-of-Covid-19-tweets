@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import nltk
 
-# nltk.download('vedar_lexicon')
-# nltk.download('stopwords')
-# nltk.download('wordnet')
-# nltk.download('punkt')
+nltk.download('vedar_lexicon')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt')
 
 import tweepy
 import re
@@ -35,10 +35,9 @@ from nltk import classify
 
 
 
-
 # '''-----------------Twitter API credentials keys-----------------'''
-
-# Put your own Credential Keys
+# 
+# Put your own credential keys
 # consumerKey = ''
 # consumerKeySecret = ''
 # accessToken = ''
@@ -75,13 +74,27 @@ from nltk import classify
 #         break
 #     try:
 #         for tweet in tweepy.Cursor(api.search,count = 10000,q = ('COVID-19' or 'coronavirus' or 'covid' or 'coronavirusoutbreak' or 'corona' or 'lockdown' or 'economy' or 'extension'), tweet_mode='extended',lang = "en",location='india').items():
-#             csvWriter.writerow([tweet.text,tweet.user.screen_name,tweet.user.location])    # Write a row to the CSV file. I use encode UTF-8
+#             csvWriter.writerow([tweet.full_text,tweet.user.screen_name,tweet.user.location])    # Write a row to the CSV file. I use encode UTF-8
 #         csvFile.close()
 #         break
 #     except tweepy.TweepError:
 #         time.sleep(120)
 #         backoff_counter += 1
 #         continue
+
+
+
+# '''------------Creating a CSV file------------'''
+# 
+# file_name='text.txt'
+# data = pd.read_csv(file_name, sep = ',',names = ['text','user_id','location'])
+# # data.shape
+# # data.head(10)
+# # data.info()
+# data['lang'] = 'en'
+# data.to_csv('DataSet.csv',index=False)
+# data
+
 
 #'''-------------Check for the Data-------------'''
 
